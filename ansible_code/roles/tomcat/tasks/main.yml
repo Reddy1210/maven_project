@@ -1,0 +1,28 @@
+- name: creating Tomcat group
+  group: name=tomcat state=present
+  become: yes
+
+- name: creating tomcat user and adding it to tomcat group
+  shell: sudo useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat
+
+- name: creting directory
+  file: path=/opt/tomcat state=directory mode="u=rw,g=rw,o=rw"
+  become: yes
+
+- name: Download Tomcat
+  get_url: url=http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.61/bin/apache-tomcat-7.0.61.tar.gz dest=/opt/apache-tomcat-7.0.61.tar.gz
+  become: yes
+
+- name: Downloading and unarchiving to desired directory
+  unarchive: src=/opt/apache-tomcat-7.0.61.tar.gz dest=/opt/tomcat remote_src=True
+  become: yes
+
+- name: Providing proper permission to the tomcat user to access to the Tomcat installation
+  command: sudo chgrp -R tomcat /opt/tomcat
+
+- name: Changing owner to tomcat user
+  command: sudo chown -R tomcat /opt/tomcat
+
+- name: Providing permissions to tomcat
+  command: sudo chmod -R 755 /opt/tomcat
+
