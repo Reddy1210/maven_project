@@ -1,0 +1,3 @@
+- hosts: host
+  roles:
+   - tomcat_start_stop
