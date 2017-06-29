@@ -1,19 +1,23 @@
-#/opt/tomcat/apache-tomcat-7.0.61/bin$ 
 - name: start tomcat
-  command: ./startup.sh
-  args: chdir=/opt/tomcat/apache-tomcat-7.0.61/bin
-  tags: 
-      - start_tomcat
+  command: sh {{ tomcat_path }}/startup.sh
+  become: yes
+  tags: start_tomcat
 
+# - name: start tomcat  
+#   shell: chdir={{ tomcat_path }}&&./startup.sh
+#   tags: start_tomcat
+
+# - name: stop tomcat
+#   command: ./shutdown.sh
+#   args: chdir={{ tomcat_path }}
+#   tags: stop_tomcat
+
+# - name: restart tomcat    
+#   command: ./shutdown.sh && ./startup.sh
+#   args: chdir={{ tomcat_path }}
+#   tags: restart_tomcat
 - name: stop tomcat
-  command: ./shutdown.sh
-  args: chdir=/opt/tomcat/apache-tomcat-7.0.61/bin
-  tags:
-      - stop_tomcat
-
-- name: restart tomcat    
-  command: ./shutdown.sh && ./startup.sh
-  args: chdir=/opt/tomcat/apache-tomcat-7.0.61/bin
-  tags:
-      - restart_tomcat
+  command: sh {{ tomcat_path }}/shutdown.sh
+  become: yes
+  tags: start_tomcat
 
