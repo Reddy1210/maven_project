@@ -1,0 +1,12 @@
+- name: stop tomcat
+  command: sh {{ tomcat_path }}/shutdown.sh
+  become: yes
+  tags: start_tomcat
+
+- name: copy the target
+  copy: src=my_project-1.0-SNAPSHOT.jar dest=/opt/tomcat/apache-tomcat-7.0.61/webapps
+
+- name: start tomcat
+  command: sh {{ tomcat_path }}/startup.sh
+  become: yes
+  tags: start_tomcat
