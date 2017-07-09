@@ -4,7 +4,7 @@
 #   tags: start_tomcat
 
 - name: stop tomcat
-  command: ./shutdown.sh
+  shell: ./shutdown.sh
   args: chdir={{ tomcat_path }}
   become: yes
   tags: stop_tomcat
@@ -23,7 +23,7 @@
 #   tags: start_tomcat
 
 - name: restart tomcat    
-  command: ./startup.sh
+  shell: ./startup.sh
   args: chdir={{ tomcat_path }}
   become: yes
   tags: start_tomcat
