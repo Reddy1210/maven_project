@@ -9,6 +9,8 @@
          copy: src=my_project-1.0-SNAPSHOT.jar dest=/opt/apache-tomcat-7.0.61/webapps
 
        - name: start tomcat
-         command: sh /opt/apache-tomcat-7.0.61/bin/startup.sh
+         command: ./startup.sh
+         args: 
+            chdir= /opt/apache-tomcat-7.0.61/bin/
          become: yes
   
