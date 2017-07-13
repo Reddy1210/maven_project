@@ -2,4 +2,4 @@
   roles:
    - java
    - tomcat
-   - tomcat_start_stop
+   
