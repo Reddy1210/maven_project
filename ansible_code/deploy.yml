@@ -1,16 +1,14 @@
 - hosts: host
   tasks:
        - name: stop tomcat
-         command: sh /opt/apache-tomcat-7.0.61/bin/shutdown.sh
+         service: name=tomcat7 state=stopped
          become: yes
   
        - name: copy the target
          become: yes
-         copy: src=my_project-1.0-SNAPSHOT.jar dest=/opt/apache-tomcat-7.0.61/webapps
+         copy: src=my_project-1.0-SNAPSHOT.jar dest=/var/lib/tomcat7/webapps
 
        - name: start tomcat
-         shell: ./startup.sh
-         args: 
-           chdir: /opt/apache-tomcat-7.0.61/bin/
+         service: name=tomcat7 state=started
          become: yes
   
